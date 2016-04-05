@@ -12,15 +12,17 @@ router.get('/', function(req, res, next) {
 router.get('/about', function(req, res, next) {
  res.render("about", {title: "About Us!",description:'This is Sample About Us Page !'});
 });
+router.get('/Authenticate', function(req, res, next) {
+  res.render('process_get', { 'first_name':"",'last_name':"",'email':"", 'file_name':""});
+});
 
-router.post("/login", function(req, res, next){
+router.post("/Authenticate", function(req, res, next){
  
-    console.log(req.body.email);
-   var getUser= User.find({email:"umeshsehta786@yahoo.com" });
-    User.findOne({ 'email': 'umeshsehta786@yahoo.com' }, 'firstname lastname email logo', function (err, person) {
+    console.log(req.body.email);  console.log(req.body.password);
+      User.findOne({ 'email': req.body.email, 'password': req.body.password}, 'firstname lastname email logo', function (err, person) {
+          console.log(person)
                 if (err) return handleError(err);
-        console.log('%s %s is yours name & email is %s.', person.firstname, person.lastname, person.email);
-              res.render('process_get', { 'first_name':person.firstname,'last_name':person.lastname,'email':person.email, 'file_name':person.logo });
+                      res.render('process_get', { 'first_name':person.firstname,'last_name':person.lastname,'email':person.email, 'file_name':person.logo });
             
     });
     
