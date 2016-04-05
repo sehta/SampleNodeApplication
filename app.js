@@ -6,10 +6,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
 var multer = require('multer');
 var routes = require('./routes/index');
-
 var process_get = require('./routes/process_get');
 var process_post = require('./routes/process_post');
 var uploads = require('./routes/uploads');
@@ -33,21 +31,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 var upload =multer({ dest: './uploads' });
 
-
-
-
-
-
 app.use('/', routes);
 app.use('/process_get', process_get);
 app.use('/process_post', process_post);
 app.use('/uploads', uploads);
 //app.use('/upload', uploads1);
-
-
-
-
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
